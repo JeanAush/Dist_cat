@@ -4,42 +4,54 @@ import './App.css';
 import { Register } from './Register';
 import { Login } from './Login';
 import { Form } from './Form';
+import Home from './Home';
 
 function App() {
   const [currentForm, setCurrentForm] = useState('login');
+  const [isLoggedIn, setLoggedIn] = useState(false); 
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   };
 
-  return (
-    <div className="App">
-      {
-        currentForm === "login" ?<Login onFormSwitch={toggleForm}/>: <Register onFormSwitch={toggleForm}/>
-      }
-    </div>
+  const handleLogin =()=>{
+    setLoggedIn(true)
+  }
+
+  // return (
+  //   <div className="App">
+  //     {
+  //       currentForm === "login" ?<Login onFormSwitch={toggleForm}/>: <Register onFormSwitch={toggleForm}/>
+  //     }
+  //   </div>
+  // <Route 
+  //         path="/form" 
+  //         element={isLoggedIn ? <Form /> : <Navigate to="/register" />} />
+  //       <Route
+  // );
+
+ return (
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/login" 
+          element={<Login />} />
+        <Route 
+          path="/register" 
+          element={<Register />} />
+        <Route 
+          path="/form" 
+          element={<Form />} />
+        <Route
+          path="/"
+          element={<Home />} 
+        />
+      </Routes>
+    </BrowserRouter>
   );
+
     }
 
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route 
-//           path="/login" 
-//           element={<Login handleLogin={handleLogin} />} />
-//         <Route 
-//           path="/register" 
-//           element={<Register />} />
-//         <Route 
-//           path="/form" 
-//           element={isLoggedIn ? <Form /> : <Navigate to="/register" />} />
-//         <Route
-//           path="/"
-//           element={isLoggedIn ? <Navigate to="/form" /> : <Form />}
-//         />
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
+ 
 
 export default App;
